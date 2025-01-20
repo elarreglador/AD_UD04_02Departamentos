@@ -1,0 +1,72 @@
+DEPARTAMENTOS: CREAMOS LA BASE DE DATOS EN TERMINAL MySQL
+
+$ mysql -u phpmyadmin -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.40-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE ejemplo;
+Query OK, 1 row affected (0,03 sec)
+
+mysql> USE ejemplo;
+Database changed
+mysql> CREATE TABLE departamentos (
+    -> dept_NO INT NOT NULL PRIMARY KEY,
+    -> dnombre VARCHAR (15),
+    -> loc VARCHAR (15));
+Query OK, 0 rows affected (0,08 sec)
+
+mysql> CREATE TABLE empleados (
+    -> Emp_no INT NOT NULL PRIMARY KEY,
+    -> apellido VARCHAR (20),
+    -> oficio VARCHAR (15),
+    -> dir INT,
+    -> fecha_alta DATE,
+    -> salario FLOAT (6,2),
+    -> comision FLOAT (6,2),
+    -> dept_NO INT,
+    -> FOREIGN KEY(dept_NO) REFERENCES departamentos(dept_NO));
+Query OK, 0 rows affected, 2 warnings (0,10 sec)
+
+mysql> INSERT INTO departamentos VALUES (1, 'Ventas', 'VALENCIA');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO departamentos VALUES (2, 'Administracion', 'MADRID');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO departamentos VALUES (3, 'Ingenieria', 'BARCELONA');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO departamentos VALUES (4, 'Fabricacion', 'BARCELONA');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO empleados VALUES (1, 'Garcia', 'Comercial', 1, '2019-01-01', 1200, 20, 1);
+Query OK, 1 row affected (0,04 sec)
+
+mysql> INSERT INTO empleados VALUES (2, 'Martinez', 'Comercial', 1, '2020-01-01', 1800, 15, 1);
+Query OK, 1 row affected (0,03 sec)
+
+mysql> INSERT INTO empleados VALUES (3, 'Torres', 'Tecnico Com', 1, '2020-01-01', 1800, 15, 1);
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO empleados VALUES (4, 'Pérez', 'Administrativo', 1, '2019-02-01', 1300, 0, 2);
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO empleados VALUES (5, 'López', 'Ing Jefe', 1, '2019-01-01', 2200, 5, 3);
+Query OK, 1 row affected (0,03 sec)
+
+mysql> INSERT INTO empleados VALUES (6, 'Sánchez', 'Ingeniero', 1, '2019-01-01', 1800, 5, 3);
+Query OK, 1 row affected (0,03 sec)
+
+mysql> exit
+Bye
+
