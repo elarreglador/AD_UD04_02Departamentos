@@ -23,6 +23,7 @@ public class Departamentos implements java.io.Serializable {
 	private int deptNo;
 	@Column(name = "dnombre", length = 15)
 	private String dnombre;
+	@Column(name = "loc", length = 15)
 	private String loc;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "departamentos")
 	private Set <Empleados> empleados = new HashSet<Empleados>(0);
@@ -59,7 +60,6 @@ public class Departamentos implements java.io.Serializable {
 		this.dnombre = dnombre;
 	}
 
-	@Column(name = "loc", length = 15)
 	public String getLoc() {
 		return this.loc;
 	}
