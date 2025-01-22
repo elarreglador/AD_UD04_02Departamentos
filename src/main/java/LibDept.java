@@ -3,6 +3,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import ud04_02Departamentos.entity.Departamentos;
+import ud04_02Departamentos.entity.Empleados;
 
 public class LibDept {
 	
@@ -16,6 +17,34 @@ public class LibDept {
 		        tx = session.beginTransaction();
 		        // Convierte el objeto en una fila de la tabla y almacenamos en memoria
 		        session.persist(departamento);
+		        // Guarda los cambios en la BD.
+		        tx.commit();
+		        return true;
+			} catch (Exception e) {
+				if (tx != null) {
+			        // Si hay una transacción activa deshace los cambios.
+					tx.rollback();
+				}
+				throw e;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	
+	public static boolean eliminar(SessionFactory sf, int id) throws Exception {
+		// Verifica que no exista el departamento
+		if ( LibDept.existeID(sf, id) ) {
+			// Variable para manejar la transacción.
+			Transaction tx = null;
+			try (Session session = sf.openSession() ){
+				// Obtiene el departamento
+				Departamentos departamento = LibDept.obtenerPorID(sf, id);
+		        // Inicia una nueva transacción.
+		        tx = session.beginTransaction();
+		        // elimina la fila de la memoria
+		        session.remove(departamento);
 		        // Guarda los cambios en la BD.
 		        tx.commit();
 		        return true;
