@@ -34,6 +34,14 @@ public class Main {
 	        empleado2.setOficio("Vendedor");
 	        empleado2.setSalario(1100f);
 	        LibEmpleado.agregar(sf, empleado2);
+	        
+	        // Verificamos existencia del dep id=69
+	        boolean existe = LibDept.existeID(sf, 69);
+	        System.out.println("El departamento 69 existe: " + existe);
+	        
+	    	// Verificamos existencia del dep id=778 (Nou departament)
+	        existe = LibDept.existeID(sf, 778);
+	        System.out.println("El departamento 778 existe: " + existe);
 			        
 		}
 	}

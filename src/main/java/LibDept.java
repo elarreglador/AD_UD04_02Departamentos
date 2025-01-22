@@ -36,4 +36,18 @@ public class LibDept {
 		}
 	}
 	
+	
+	public static boolean existeID(SessionFactory sf, int id) throws Exception {
+		try (Session session = sf.openSession() ){
+	        // adquiere y devuelve el objeto relacionado con la ID
+	        Departamentos resuelve = LibDept.obtenerPorID(sf, id);
+	        if ( resuelve == null ) {
+	        	return false;
+	        }
+	        return true;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 }
