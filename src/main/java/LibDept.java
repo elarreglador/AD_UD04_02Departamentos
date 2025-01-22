@@ -3,7 +3,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import ud04_02Departamentos.entity.Departamentos;
-import ud04_02Departamentos.entity.Empleados;
 
 public class LibDept {
 	
