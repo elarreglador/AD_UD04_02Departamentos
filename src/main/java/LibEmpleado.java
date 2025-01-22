@@ -1,6 +1,8 @@
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import ud04_02Departamentos.entity.Departamentos;
 import ud04_02Departamentos.entity.Empleados;
 
 public class LibEmpleado {
@@ -20,6 +22,17 @@ public class LibEmpleado {
 		        // Si hay una transacción activa deshace los cambios.
 				tx.rollback();
 			}
+			throw e;
+		}
+	}
+	
+	
+	public static Empleados obtenerPorID(SessionFactory sf, int id) throws Exception {
+		try (Session session = sf.openSession() ){
+	        // adquiere y devuelve el objeto relacionado con la ID
+			Empleados emleado = session.get(Empleados.class, id);
+	        return emleado;
+		} catch (Exception e) {
 			throw e;
 		}
 	}
