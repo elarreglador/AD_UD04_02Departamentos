@@ -6,22 +6,28 @@ import ud04_02Departamentos.entity.Departamentos;
 
 public class LibDept {
 	
-	public static void agregar(SessionFactory sf, Departamentos departamento) throws Exception {
-		// Variable para manejar la transacción.
-		Transaction tx = null;
-		try (Session session = sf.openSession() ){
-	        // Inicia una nueva transacción.
-	        tx = session.beginTransaction();
-	        // Convierte el objeto en una fila de la tabla y almacenamos en memoria
-	        session.persist(departamento);
-	        // Guarda los cambios en la BD.
-	        tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-		        // Si hay una transacción activa deshace los cambios.
-				tx.rollback();
+	public static boolean agregar(SessionFactory sf, Departamentos departamento) throws Exception {
+		// Verifica que no exista el departamento
+		if ( !LibDept.existeID(sf, departamento.getDeptNo()) ) {
+			// Variable para manejar la transacción.
+			Transaction tx = null;
+			try (Session session = sf.openSession() ){
+		        // Inicia una nueva transacción.
+		        tx = session.beginTransaction();
+		        // Convierte el objeto en una fila de la tabla y almacenamos en memoria
+		        session.persist(departamento);
+		        // Guarda los cambios en la BD.
+		        tx.commit();
+		        return true;
+			} catch (Exception e) {
+				if (tx != null) {
+			        // Si hay una transacción activa deshace los cambios.
+					tx.rollback();
+				}
+				throw e;
 			}
-			throw e;
+		} else {
+			return false;
 		}
 	}
 	
