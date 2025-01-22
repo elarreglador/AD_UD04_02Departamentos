@@ -5,17 +5,10 @@ import org.hibernate.Transaction;
 import ud04_02Departamentos.entity.Departamentos;
 
 public class LibDept {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 	
 	public static void agregar(SessionFactory sf, Departamentos departamento) throws Exception {
-		
 		// Variable para manejar la transacción.
 		Transaction tx = null;
-				
 		try (Session session = sf.openSession() ){
 	        // Inicia una nueva transacción.
 	        tx = session.beginTransaction();
@@ -31,5 +24,5 @@ public class LibDept {
 			throw e;
 		}
 	}
-
+	
 }
