@@ -18,10 +18,13 @@ import javax.persistence.Table;
 public class Departamentos implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@Column(name = "dept_NO", unique = true, nullable = false)
 	private int deptNo;
+	@Column(name = "dnombre", length = 15)
 	private String dnombre;
 	private String loc;
-	// private Set empleados = new HashSet(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "departamentos")
 	private Set <Empleados> empleados = new HashSet<Empleados>(0);
 
 
@@ -32,7 +35,6 @@ public class Departamentos implements java.io.Serializable {
 		this.deptNo = deptNo;
 	}
 
-	// public Departamentos(int deptNo, String dnombre, String loc, Set empleados) {
 	public Departamentos(int deptNo, String dnombre, String loc, Set<Empleados> empleados) {
 		this.deptNo = deptNo;
 		this.dnombre = dnombre;
@@ -40,9 +42,7 @@ public class Departamentos implements java.io.Serializable {
 		this.empleados = empleados;
 	}
 
-	@Id
 
-	@Column(name = "dept_NO", unique = true, nullable = false)
 	public int getDeptNo() {
 		return this.deptNo;
 	}
@@ -51,7 +51,6 @@ public class Departamentos implements java.io.Serializable {
 		this.deptNo = deptNo;
 	}
 
-	@Column(name = "dnombre", length = 15)
 	public String getDnombre() {
 		return this.dnombre;
 	}
@@ -69,13 +68,10 @@ public class Departamentos implements java.io.Serializable {
 		this.loc = loc;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "departamentos")
-	// 	public Set getempleados() {
 	public Set<Empleados> getempleados() {
 		return this.empleados;
 	}
 
-	// 	public void setempleados(Set empleados) {
 	public void setempleados(Set<Empleados> empleados) {
 		this.empleados = empleados;
 	}

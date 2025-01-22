@@ -20,13 +20,24 @@ import javax.persistence.TemporalType;
 public class Empleados implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@Column(name = "Emp_no", unique = true, nullable = false)
 	private int empNo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dept_NO")
 	private Departamentos departamentos;
+	@Column(name = "apellido", length = 20)
 	private String apellido;
+	@Column(name = "oficio", length = 15)
 	private String oficio;
+	@Column(name = "dir")
 	private Integer dir;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_alta", length = 10)
 	private Date fechaAlta;
+	@Column(name = "salario", precision = 6)
 	private Float salario;
+	@Column(name = "comision", precision = 6)
 	private Float comision;
 
 	public Empleados() {
@@ -48,9 +59,7 @@ public class Empleados implements java.io.Serializable {
 		this.comision = comision;
 	}
 
-	@Id
 
-	@Column(name = "Emp_no", unique = true, nullable = false)
 	public int getEmpNo() {
 		return this.empNo;
 	}
@@ -59,8 +68,7 @@ public class Empleados implements java.io.Serializable {
 		this.empNo = empNo;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dept_NO")
+
 	public Departamentos getDepartamentos() {
 		return this.departamentos;
 	}
@@ -69,7 +77,6 @@ public class Empleados implements java.io.Serializable {
 		this.departamentos = departamentos;
 	}
 
-	@Column(name = "apellido", length = 20)
 	public String getApellido() {
 		return this.apellido;
 	}
@@ -78,7 +85,6 @@ public class Empleados implements java.io.Serializable {
 		this.apellido = apellido;
 	}
 
-	@Column(name = "oficio", length = 15)
 	public String getOficio() {
 		return this.oficio;
 	}
@@ -87,7 +93,6 @@ public class Empleados implements java.io.Serializable {
 		this.oficio = oficio;
 	}
 
-	@Column(name = "dir")
 	public Integer getDir() {
 		return this.dir;
 	}
@@ -96,8 +101,7 @@ public class Empleados implements java.io.Serializable {
 		this.dir = dir;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_alta", length = 10)
+
 	public Date getFechaAlta() {
 		return this.fechaAlta;
 	}
@@ -106,7 +110,6 @@ public class Empleados implements java.io.Serializable {
 		this.fechaAlta = fechaAlta;
 	}
 
-	@Column(name = "salario", precision = 6)
 	public Float getSalario() {
 		return this.salario;
 	}
@@ -115,7 +118,6 @@ public class Empleados implements java.io.Serializable {
 		this.salario = salario;
 	}
 
-	@Column(name = "comision", precision = 6)
 	public Float getComision() {
 		return this.comision;
 	}
