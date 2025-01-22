@@ -1,6 +1,7 @@
 import javax.transaction.SystemException;
 import org.hibernate.SessionFactory;
 import ud04_02Departamentos.entity.Departamentos;
+import ud04_02Departamentos.entity.Empleados;
 
 public class Main {
 
@@ -14,7 +15,16 @@ public class Main {
 	        departamento.setDnombre("New department"); // Max. 15 caracteres
 	        departamento.setLoc("Valencia");
 	        
+	        // Generamos un nuevo empleado
+	        Empleados empleado = new Empleados(234);
+	        empleado.setDepartamentos(departamento); // indicamos su departamento
+	        empleado.setApellido("Marcial");
+	        empleado.setOficio("Tornero");
+	        empleado.setSalario(1200f);
+	        
+	        // Guardamos departamento y empleado
 	        LibDept.agregar(sf, departamento);
+	        LibEmpleado.agregar(sf, empleado);
 			        
 		}
 	}
