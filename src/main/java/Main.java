@@ -10,21 +10,30 @@ public class Main {
 		// Generamos una BD SessionFactory singleton en el try
 		try ( SessionFactory sf = HibernateUtil.getSessionFactory() ) {
 				        
-	        // Generamos un nuevo departamento
+	        // Generamos y guardamos nuevo departamento
 	        Departamentos departamento = new Departamentos(778);
-	        departamento.setDnombre("New department"); // Max. 15 caracteres
+	        departamento.setDnombre("Nou departament"); // Max. 15 caracteres
 	        departamento.setLoc("Valencia");
-	        
-	        // Generamos un nuevo empleado
-	        Empleados empleado = new Empleados(234);
-	        empleado.setDepartamentos(departamento); // indicamos su departamento
-	        empleado.setApellido("Marcial");
-	        empleado.setOficio("Tornero");
-	        empleado.setSalario(1200f);
-	        
-	        // Guardamos departamento y empleado
 	        LibDept.agregar(sf, departamento);
-	        LibEmpleado.agregar(sf, empleado);
+	        
+	        // Generamos y guardamos nuevo empleado1
+	        Empleados empleado1 = new Empleados(234);
+	        empleado1.setDepartamentos(departamento); // indicamos su departamento
+	        empleado1.setApellido("Escribano");
+	        empleado1.setOficio("Tornero");
+	        empleado1.setSalario(1200f);
+	        LibEmpleado.agregar(sf, empleado1);
+	        
+	        // Generamos y guardamos nuevo empleado2
+	        Empleados empleado2 = new Empleados(235);
+	        empleado2.setDepartamentos(
+	    	        // indicamos departamento por su ID
+	        		LibDept.obtenerPorID(sf, 1)
+	        ); 
+	        empleado2.setApellido("Ruiz");
+	        empleado2.setOficio("Vendedor");
+	        empleado2.setSalario(1100f);
+	        LibEmpleado.agregar(sf, empleado2);
 			        
 		}
 	}

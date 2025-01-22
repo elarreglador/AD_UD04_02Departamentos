@@ -25,4 +25,15 @@ public class LibDept {
 		}
 	}
 	
+	
+	public static Departamentos obtenerPorID(SessionFactory sf, int id) throws Exception {
+		try (Session session = sf.openSession() ){
+	        // adquiere y devuelve el objeto relacionado con la ID
+	        Departamentos departamento = session.get(Departamentos.class, id);
+	        return departamento;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
 }
