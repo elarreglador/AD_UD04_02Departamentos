@@ -10,6 +10,7 @@ public class Main {
 		// Generamos una BD SessionFactory singleton en el try
 		try ( SessionFactory sf = HibernateUtil.getSessionFactory() ) {
 	        boolean creado;
+	        boolean eliminado;
 	        
 	        // Generamos y guardamos nuevo departamento
 	        Departamentos departamento = new Departamentos(778);
@@ -38,7 +39,10 @@ public class Main {
 	        empleado2.setSalario(1100f);
 	        creado = LibEmpleado.agregar(sf, empleado2);
 	        System.out.println("Generado nuevo empleado: " + creado);
-
+	        
+	        // Elimina el empleado1
+	        eliminado = LibEmpleado.eliminar(sf, empleado1.getEmpNo());
+	        System.out.println("empleado con ID:234 eliminado: " + eliminado);
 		}
 	}
 

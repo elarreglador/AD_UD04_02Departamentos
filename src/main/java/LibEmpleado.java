@@ -32,6 +32,34 @@ public class LibEmpleado {
 	}
 	
 	
+	public static boolean eliminar(SessionFactory sf, int id) throws Exception {
+		// Verifica que no exista el empleado
+		if ( LibEmpleado.existeID(sf, id) ) {
+			// Variable para manejar la transacción.
+			Transaction tx = null;
+			try (Session session = sf.openSession() ){
+				// Obtiene el departamento
+				Empleados empleado = LibEmpleado.obtenerPorID(sf, id);
+		        // Inicia una nueva transacción.
+		        tx = session.beginTransaction();
+		        // elimina la fila de la memoria
+		        session.remove(empleado);
+		        // Guarda los cambios en la BD.
+		        tx.commit();
+		        return true;
+			} catch (Exception e) {
+				if (tx != null) {
+			        // Si hay una transacción activa deshace los cambios.
+					tx.rollback();
+				}
+				throw e;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	
 	public static Empleados obtenerPorID(SessionFactory sf, int id) throws Exception {
 		try (Session session = sf.openSession() ){
 	        // adquiere y devuelve el objeto relacionado con la ID
