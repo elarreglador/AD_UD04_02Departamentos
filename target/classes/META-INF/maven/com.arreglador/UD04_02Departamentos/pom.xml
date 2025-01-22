@@ -25,6 +25,11 @@
 			<version>5.4.10.Final</version>
 			<type>pom</type>
 		</dependency>
+		<dependency>
+			<groupId>com.arreglador</groupId>
+			<artifactId>UD04-01Hibernate</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 </project>
