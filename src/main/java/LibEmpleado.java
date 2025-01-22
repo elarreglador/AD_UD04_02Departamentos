@@ -1,6 +1,7 @@
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import ud04_02Departamentos.entity.Empleados;
 
 public class LibEmpleado {
@@ -30,6 +31,20 @@ public class LibEmpleado {
 	        // adquiere y devuelve el objeto relacionado con la ID
 			Empleados emleado = session.get(Empleados.class, id);
 	        return emleado;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	
+	public static boolean existeID(SessionFactory sf, int id) throws Exception {
+		try (Session session = sf.openSession() ){
+	        // adquiere y devuelve el objeto relacionado con la ID
+	        Empleados resuelve = LibEmpleado.obtenerPorID(sf, id);
+	        if ( resuelve == null ) {
+	        	return false;
+	        }
+	        return true;
 		} catch (Exception e) {
 			throw e;
 		}
