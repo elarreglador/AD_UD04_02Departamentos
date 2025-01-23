@@ -60,15 +60,15 @@ public class LibEmpleado {
 	}
 	
 	
-	public static void sincronizar(SessionFactory sf, Empleados empleado) throws Exception {
+	public static void sincronizar (SessionFactory sf, Empleados empleado) 
+			throws Exception {
 	    try (Session session = sf.openSession()) {
 	        Transaction tx = session.beginTransaction();
 	        try {
-	            // Reatachar el objeto detached y sincronizarlo con la base de datos
-	            session.merge(empleado);
+	            session.merge(empleado); // Sincroniza
 	            tx.commit(); // Guarda los cambios en la BD.
 	        } catch (Exception e) {
-	            if (tx != null) tx.rollback(); // Revertir si ocurre un error
+	            if (tx != null) tx.rollback(); // Revertir si error
 	            throw e;
 	        }
 	    }

@@ -58,6 +58,8 @@ public class Main {
 	        System.out.println("El salario de " + empleado2.getApellido() +
 	        		" era de " + oldSalario + "EUR y ahora es de " +
 	        		empleado2.getSalario() + "EUR.");
+		} catch (Exception e) {
+			System.out.println("EXCEPCION: " + e);
 		}
 	}
 
