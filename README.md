@@ -4,7 +4,11 @@ Este es un proyecto para comprender el funcionamiento de Hibernate, un ORM java 
 
 Cada Tabla/objeto (entidad) se considera que tiene columnas/atributos, al trabajar con objetos, podemos usar getters y setters para leer y cambiar sus atributos, y estos se almacenaran en la base de datos en forma de filas de una tabla.
 
+## Funcionamiento
 
+Desde Main creamos una SessionFactory llamada sf de tipo singleton (una sola para toda la app), y en las funciones de las clases LibDept y LibEmpleado crearemos una sesion propia para cada tarea.
+
+Main recibira objetos de tipo Departamentos o Empleados que estaran 'detached', es decir desincronizados de la BD, esto implica que cualquier cambio en ellos no se vera reflejado en la BD hasta que no los re-sincronizemos con las funciones sincronizar() de LibEmpleado y LibDept tal y como se puede apreciar en las ultimas lineas de Main cuando subimos el sueldo a uno de los empleados.
 
 ## Archivos
 
@@ -70,5 +74,4 @@ ejemplo
     L dir - INT
     L apellido - VARCHAR (20)
 '''
-
 
