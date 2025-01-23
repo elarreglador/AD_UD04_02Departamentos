@@ -4,6 +4,12 @@ Este es un proyecto para comprender el funcionamiento de Hibernate, un ORM java 
 
 Cada Tabla/objeto (entidad) se considera que tiene columnas/atributos, al trabajar con objetos, podemos usar getters y setters para leer y cambiar sus atributos, y estos se almacenaran en la base de datos en forma de filas de una tabla.
 
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/elarreglador/AD_UD04_02Departamentos/refs/heads/main/Conversion.png" alt="HomeScreen" width="500" title="HomeScreen"></td>
+  </tr>
+</table>
+
 ## Funcionamiento
 
 Desde Main creamos una SessionFactory llamada sf de tipo singleton (una sola para toda la app), y en las funciones de las clases LibDept y LibEmpleado crearemos una sesion propia para cada tarea.
@@ -26,7 +32,7 @@ LibEmpleado.java - Herramientas auxiliares de los empleados
 
 ## Creacion de la base de datos
 
-'''
+```
 CREATE DATABASE ejemplo;
 USE ejemplo;
 CREATE TABLE departamentos (
@@ -53,25 +59,26 @@ INSERT INTO empleados VALUES (3, 'Torres', 'Tecnico Com', 1, '2020-01-01', 1800,
 INSERT INTO empleados VALUES (4, 'Pérez', 'Administrativo', 1, '2019-02-01', 1300, 0, 2);
 INSERT INTO empleados VALUES (5, 'López', 'Ing Jefe', 1, '2019-01-01', 2200, 5, 3);
 INSERT INTO empleados VALUES (6, 'Sánchez', 'Ingeniero', 1, '2019-01-01', 1800, 5, 3);
-'''
+```
 
 ## Descripcion de la BD
 
-'''
+```
 ejemplo
  |
  L departamentos
- |  L dept_NO - INT NOT NULL PRIMARY KEY,
- |  L loc - VARCHAR (15)
- |  L dnombre - VARCHAR (15)
+ |     L dept_NO - INT NOT NULL PRIMARY KEY,
+ |     L loc - VARCHAR (15)
+ |     L dnombre - VARCHAR (15)
+ |
  L empleados
-    L Emp_no - INT NOT NULL PRIMARY KEY
-    L oficio - VARCHAR (15)
-    L dept_NO - INT
-    L comision - FLOAT (6,2)
-    L fecha_alta - DATE
-    L salario - FLOAT (6,2)
-    L dir - INT
-    L apellido - VARCHAR (20)
-'''
+       L Emp_no - INT NOT NULL PRIMARY KEY
+       L oficio - VARCHAR (15)
+       L dept_NO - INT
+       L comision - FLOAT (6,2)
+       L fecha_alta - DATE
+       L salario - FLOAT (6,2)
+       L dir - INT
+       L apellido - VARCHAR (20)
+```
 
