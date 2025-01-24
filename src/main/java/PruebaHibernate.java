@@ -28,40 +28,60 @@ public class PruebaHibernate {
 		        	.list()
 		        	.forEach(e-> System.out.println( e.toString() ) );
 		        
-		        // Empleados que cobren mas de un minimo ( imprime dos campos )
-		        System.out.println("\nEmpleados que cobren mas de un minimo");
+		     // Empleados que cobren más de un mínimo
+		        System.out.println("\nEmpleados que cobren más de un mínimo");
 		        float minimo = 1000f;
-		        Query<Object[]> query3 = session.createQuery(
-		                "SELECT E.apellido, E.salario " +
+		        Query<Empleados> query3 = session.createQuery(
 		                "FROM Empleados E " +
-		                "WHERE E.salario > :minimo", Object[].class);
+		                "WHERE E.salario > :minimo", Empleados.class);
 		        query3.setParameter("minimo", minimo);
-		        List<Object[]> resultados = query3.list();
-		        resultados.forEach(r -> System.out.println( r[0] + " | " + r[1]));
+		        List<Empleados> resultados = query3.list();
+		        resultados.forEach(r -> System.out.println(r.getApellido() + " | " + r.getSalario()));
 		        
 		        // Empleados de departamento Ventas
 		        System.out.println("\nEmpleados de departamento Ventas");
 		        String dep = "ventas";
-		        Query<Object[]> query4 = session.createQuery(
-		                "SELECT E.empNo, E.apellido " +
+		        Query<Empleados> query4 = session.createQuery(
 		                "FROM Empleados E " +
-		                "WHERE E.departamentos.dnombre = :dep", Object[].class);
+		                "WHERE E.departamentos.dnombre = :dep", Empleados.class);
 		        query4.setParameter("dep", dep);
-		        List<Object[]> resultados4 = query4.list();
-		        resultados4.forEach(r -> System.out.println("Emp_no: " + r[0] + ", " + r[1]));
+		        List<Empleados> resultados4 = query4.list();
+		        resultados4.forEach(r -> System.out.println("Emp_no: " + r.getEmpNo() + ", " + r.getApellido()));
 		        
 		        // Empleados de departamento Ventas con salario > 1500
 		        System.out.println("\nEmpleados de departamento Ventas con salario > 1500");
 		        String dep5 = "ventas";
-		        Query<Object[]> query5 = session.createQuery(
-		                "SELECT E.empNo, E.apellido, E.salario " +
+		        Query<Empleados> query5 = session.createQuery(
 		                "FROM Empleados E " +
 		                "WHERE E.departamentos.dnombre = :dep5 " +
-		                "AND E.salario > 1500", Object[].class);
+		                "AND E.salario > 1500", Empleados.class);
 		        query5.setParameter("dep5", dep5);
-		        List<Object[]> resultados5 = query5.list();
-		        resultados5.forEach(r -> System.out.println("Emp_no: " + r[0] + ", " + r[1] + ", " + r[2] + "EUR."));
-	
+		        List<Empleados> resultados5 = query5.list();
+		        resultados5.forEach(r -> System.out.println(
+		        		"Emp_no: " + r.getEmpNo() + ", " + r.getApellido() + ", " + r.getSalario() + "EUR."
+		        	)
+		        );
+		        
+		        // Apellidos y la ciudad donde trabaja 
+		        System.out.println("\nApellido y ciudad donde trabaja");
+		        Query<Empleados> query6 = session.createQuery(
+		                "FROM Empleados E ", Empleados.class);
+		        List<Empleados> resultados6 = query6.list();
+		        resultados6.forEach(r -> System.out.println( 
+		        		r.getApellido() + " trabaja en " + r.getDepartamentos().getLoc() 
+		        	)
+		        );
+		        
+		        // Empleado más veterano
+		        System.out.println("\nEmpleado más veterano");
+		        Empleados empleado = session.createQuery(
+		                "WHERE E.fechaAlta = " +
+		                "(SELECT min(E1.fechaAlta) FROM Empleados E1)",
+		                Empleados.class
+		        ).list().get(0);  // Nos quedamos con el primer resultado (si hay varios)
+		        System.out.println(empleado.toString());
+
+		        
 	        } catch (Exception e) {
 	        	System.out.println("Exception en session: " + e);
 	        }
