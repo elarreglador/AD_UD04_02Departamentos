@@ -125,5 +125,18 @@ public class Empleados implements java.io.Serializable {
 	public void setComision(Float comision) {
 		this.comision = comision;
 	}
+	
+	@Override
+	public String toString() {
+	    return "empNo=" + empNo +
+	           ", apellido='" + apellido + '\'' +
+	           ", oficio='" + oficio + '\'' +
+	           ", fechaAlta=" + fechaAlta +
+	           ", salario=" + salario +
+	           ", comision=" + comision +
+	           ", departamento=" + 
+	           (departamentos != null ? departamentos.getDnombre() : "Sin Departamento");
+	}
+
 
 }

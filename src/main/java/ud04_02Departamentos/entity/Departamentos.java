@@ -75,5 +75,14 @@ public class Departamentos implements java.io.Serializable {
 	public void setempleados(Set<Empleados> empleados) {
 		this.empleados = empleados;
 	}
+	
+	@Override
+	public String toString() {
+	    return "deptNo=" + deptNo +
+	           ", nombre='" + dnombre + '\'' +
+	           ", localizacion='" + loc + '\'' +
+	           ", empleados=" + 
+	           (empleados != null ? empleados.size() + " empleados" : "Sin empleados");
+	}
 
 }
