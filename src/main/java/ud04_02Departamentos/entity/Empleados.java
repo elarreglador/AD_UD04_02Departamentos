@@ -126,6 +126,7 @@ public class Empleados implements java.io.Serializable {
 		this.comision = comision;
 	}
 	
+	/*
 	@Override
 	public String toString() {
 	    return "empNo=" + empNo +
@@ -137,6 +138,6 @@ public class Empleados implements java.io.Serializable {
 	           ", departamento=" + 
 	           (departamentos != null ? departamentos.getDnombre() : "Sin Departamento");
 	}
-
+*/
 
 }
